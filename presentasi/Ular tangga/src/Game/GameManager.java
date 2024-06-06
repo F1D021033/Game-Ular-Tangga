@@ -1,0 +1,118 @@
+//Berikut adalah kode lengkapnya beserta komentar per fungsi:
+package src.Game;
+
+public class GameManager {
+    // Fungsi untuk mengatur pergerakan pemain dan penyesuaian ikon di papan permainan
+    public static void Jalan(UlarTangga game, int posisiP1, int posisiP2, int giliran) {
+        byte a1;
+        int a2;
+        byte s1;
+        int s2;
+
+        // Memeriksa giliran pemain
+        if (giliran == 1) {
+            // Menentukan koordinat baris dan kolom untuk pemain 1
+            if (UlarTangga.cekPlayer1 / 10 % 2 == 0) {
+                s1 = 0;
+                s2 = UlarTangga.cekPlayer1 % 10 - 1;
+            } else {
+                s1 = 9;
+                s2 = 10 - UlarTangga.cekPlayer1 % 10;
+            }
+
+            // Menyesuaikan ikon pemain 2 jika bertabrakan dengan pemain 1
+            if (UlarTangga.cekPlayer1 == UlarTangga.cekPlayer2) {
+                if (UlarTangga.cekPlayer1 <= 10) {
+                    game.lArrPapan[9][UlarTangga.cekPlayer1 - 1].setIcon(game.PapanP2[9][UlarTangga.cekPlayer1 - 1]);
+                } else if (UlarTangga.cekPlayer1 % 10 == 0) {
+                    game.lArrPapan[10 - UlarTangga.cekPlayer1 / 10][s1].setIcon(game.PapanP2[10 - UlarTangga.cekPlayer1 / 10][s1]);
+                } else {
+                    game.lArrPapan[9 - UlarTangga.cekPlayer1 / 10][s2].setIcon(game.PapanP2[9 - UlarTangga.cekPlayer1 / 10][s2]);
+                }
+            } else if (UlarTangga.cekPlayer1 <= 10) {
+                // Menyesuaikan ikon pemain 1 di papan
+                game.lArrPapan[9][UlarTangga.cekPlayer1 - 1].setIcon(game.PapanKosong[9][UlarTangga.cekPlayer1 - 1]);
+            } else if (UlarTangga.cekPlayer1 % 10 == 0) {
+                game.lArrPapan[10 - UlarTangga.cekPlayer1 / 10][s1].setIcon(game.PapanKosong[10 - UlarTangga.cekPlayer1 / 10][s1]);
+            } else {
+                game.lArrPapan[9 - UlarTangga.cekPlayer1 / 10][s2].setIcon(game.PapanKosong[9 - UlarTangga.cekPlayer1 / 10][s2]);
+            }
+
+            // Menentukan koordinat baris dan kolom untuk pemain 1 setelah pergerakan
+            if (posisiP1 / 10 % 2 == 0) {
+                a1 = 0;
+                a2 = posisiP1 % 10 - 1;
+            } else {
+                a1 = 9;
+                a2 = 10 - posisiP1 % 10;
+            }
+
+            // Menyesuaikan ikon pemain 1 dan 2 jika posisi keduanya sama setelah pergerakan
+            if (posisiP1 == posisiP2) {
+                if (posisiP1 <= 10) {
+                    game.lArrPapan[9][posisiP1 - 1].setIcon(game.PapanP1P2[9][posisiP1 - 1]);
+                } else if (posisiP1 % 10 == 0) {
+                    game.lArrPapan[10 - posisiP1 / 10][a1].setIcon(game.PapanP1P2[10 - posisiP1 / 10][a1]);
+                } else {
+                    game.lArrPapan[9 - posisiP1 / 10][a2].setIcon(game.PapanP1P2[9 - posisiP1 / 10][a2]);
+                }
+            } else if (posisiP1 <= 10) {
+                // Menyesuaikan ikon pemain 1 di papan setelah pergerakan
+                game.lArrPapan[9][posisiP1 - 1].setIcon(game.PapanP1[9][posisiP1 - 1]);
+            } else if (posisiP1 % 10 == 0) {
+                game.lArrPapan[10 - posisiP1 / 10][a1].setIcon(game.PapanP1[10 - posisiP1 / 10][a1]);
+            } else {
+                game.lArrPapan[9 - posisiP1 / 10][a2].setIcon(game.PapanP1[9 - posisiP1 / 10][a2]);
+            }
+        }
+
+        // Pengecekan giliran pemain 2
+        if (giliran == 2) {
+            // ... (mirip dengan blok kode untuk pemain 1, namun dengan pemain 2)
+            if (UlarTangga.cekPlayer2 / 10 % 2 == 0) {
+                s1 = 0;
+                s2 = UlarTangga.cekPlayer2 % 10 - 1;
+            } else {
+                s1 = 9;
+                s2 = 10 - UlarTangga.cekPlayer2 % 10;
+            }
+            if (UlarTangga.cekPlayer1 == UlarTangga.cekPlayer2) {
+                if (UlarTangga.cekPlayer2 <= 10) {
+                    game.lArrPapan[9][UlarTangga.cekPlayer2 - 1].setIcon(game.PapanP1[9][UlarTangga.cekPlayer2 - 1]);
+                } else if (UlarTangga.cekPlayer2 % 10 == 0) {
+                    game.lArrPapan[10 - UlarTangga.cekPlayer2 / 10][s1].setIcon(game.PapanP1[10 - UlarTangga.cekPlayer2 / 10][s1]);
+                } else {
+                    game.lArrPapan[9 - UlarTangga.cekPlayer2 / 10][s2].setIcon(game.PapanP1[9 - UlarTangga.cekPlayer2 / 10][s2]);
+                }
+            } else if (UlarTangga.cekPlayer2 <= 10) {
+                game.lArrPapan[9][UlarTangga.cekPlayer2 - 1].setIcon(game.PapanKosong[9][UlarTangga.cekPlayer2 - 1]);
+            } else if (UlarTangga.cekPlayer2 % 10 == 0) {
+                game.lArrPapan[10 - UlarTangga.cekPlayer2 / 10][s1].setIcon(game.PapanKosong[10 - UlarTangga.cekPlayer2 / 10][s1]);
+            } else {
+                game.lArrPapan[9 - UlarTangga.cekPlayer2 / 10][s2].setIcon(game.PapanKosong[9 - UlarTangga.cekPlayer2 / 10][s2]);
+            }
+            if (posisiP2 / 10 % 2 == 0) {
+                a1 = 0;
+                a2 = posisiP2 % 10 - 1;
+            } else {
+                a1 = 9;
+                a2 = 10 - posisiP2 % 10;
+            }
+            if (posisiP1 == posisiP2) {
+                if (posisiP1 <= 10) {
+                    game.lArrPapan[9][posisiP2 - 1].setIcon(game.PapanP1P2[9][posisiP2 - 1]);
+                } else if (posisiP2 % 10 == 0) {
+                    game.lArrPapan[10 - posisiP2 / 10][a1].setIcon(game.PapanP1P2[10 - posisiP2 / 10][a1]);
+                } else {
+                    game.lArrPapan[9 - posisiP2 / 10][a2].setIcon(game.PapanP1P2[9 - posisiP2 / 10][a2]);
+                }
+            } else if (posisiP2 <= 10) {
+                game.lArrPapan[9][posisiP2 - 1].setIcon(game.PapanP2[9][posisiP2 - 1]);
+            } else if (posisiP2 % 10 == 0) {
+                game.lArrPapan[10 - posisiP2 / 10][a1].setIcon(game.PapanP2[10 - posisiP2 / 10][a1]);
+            } else {
+                game.lArrPapan[9 - posisiP2 / 10][a2].setIcon(game.PapanP2[9 - posisiP2 / 10][a2]);
+            }
+        }
+    }  
+}
